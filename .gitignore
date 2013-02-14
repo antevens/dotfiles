@@ -55,3 +55,5 @@ passwd
 .viminfo
 .bash_history
 _viminfo
+id_dsa
+id_rsa
