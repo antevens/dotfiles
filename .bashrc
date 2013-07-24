@@ -17,6 +17,10 @@ PS1='\[\033[01;32m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '
 # Some aliases
 alias vi=vim
 
+# Set colors for ls and CLI
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
 # Git config
 git config --global user.name "Jarl Stefansson"
 git config --global user.email jarl.stefansson@gmail.com 
