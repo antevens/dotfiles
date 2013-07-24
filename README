@@ -5,13 +5,21 @@ mkdir -p $HOME/Revisions && cd $HOME/Revisions
 git clone https://github.com/philips/ghar.git
 cd $HOME/Revisions/ghar
 bin/ghar add https://github.com/jalli/dotfiles.git
+
+# Do the above command for any additional repos that you want ghar to pull, especially private
+# dotfile repos, bashrc stubs should be located in the .bashrc.d directory in
+# the repos
+
 cd $HOME/ghar/dotfiles
 git submodule init && git submodule update
 bin/ghar install
+
+# On Mac
     sudo mkdir -p /usr/include/python2.7
     sudo ln -s /System/Library/Frameworks/Python.framework/Versions/Current/include/python2.7/pyconfig.h /usr/include/python2.7/pyconfig.h
 
 chmod -R u+xg-wo-w $HOME/.bashrc.d/
-Restart Shell
+
+# Restart Shell
 
 curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
