@@ -17,6 +17,16 @@ PS1='\[\033[01;32m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '
 # Some aliases
 alias vi=vim
 
+random_wrapper() {
+    if [ "$1" == "" ]; then
+        echo "Random requires length parameter!"
+        exit 1
+    fi
+    dd if=/dev/urandom bs=$1 count=1 | base64 | sed '$s/.$//'
+}
+
+alias random=random_wrapper
+
 # Set colors for ls and CLI
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -31,3 +41,6 @@ git config --global credential.helper 'cache --timeout=3600' # Set the cache to 
 # Pull latest on each login
 ghar pull > /dev/null
 ghar install > /dev/null
+
+# Create .bashrc.d directory and enforce permissions
+mkdir $HOME/.bashrc.d && chmod 700 $HOME/.bashrc.d && chmod -R og-wrx $HOME/.bashrc.d

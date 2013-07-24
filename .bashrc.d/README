@@ -1,0 +1,2 @@
+# This directory is to allow multiple bashrc scripts to coexist, add any script
+# you want to be executed to this directory using ghar or vcsh
