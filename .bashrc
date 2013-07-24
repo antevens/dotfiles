@@ -1,5 +1,5 @@
 #######################################################
-# Jarl Stefanssons .bashrc filea
+# Jarl Stefanssons .bashrc file
 #######################################################a
 
 GIT_BASE="${HOME}/Revisions"
