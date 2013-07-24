@@ -42,7 +42,8 @@ git config --global credential.helper 'cache --timeout=3600' # Set the cache to 
 ghar pull > /dev/null
 ghar install > /dev/null
 
-# Create .bashrc.d directory and enforce permissions
+# Run additional bashrc scipts or if .bashrc.d does not exist
+# create .bashrc.d directory and enforce permissions
 if [ -d $HOME/.bashrc.d ]; then
     for script in $HOME/.bashrc.d/*; do
         # Skip non-executable files
