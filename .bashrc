@@ -43,4 +43,13 @@ ghar pull > /dev/null
 ghar install > /dev/null
 
 # Create .bashrc.d directory and enforce permissions
-mkdir $HOME/.bashrc.d && chmod 700 $HOME/.bashrc.d && chmod -R og-wrx $HOME/.bashrc.d
+if [ -d $HOME/.bashrc.d ]; then
+    for script in $HOME/.bashrc.d/*; do
+        # Skip non-executable files
+        [ -x "$script" ] || continue
+        # Execute scripts in current shell
+        source $script
+    done
+else
+    mkdir $HOME/.bashrc.d && chmod 700 $HOME/.bashrc.d && chmod -R og-wrx $HOME/.bashrc.d
+fi
