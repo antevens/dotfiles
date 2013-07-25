@@ -44,9 +44,9 @@ ghar install > /dev/null
 
 # Run additional bashrc scipts or if .bashrc.d does not exist
 # create .bashrc.d directory and enforce permissions
-# Make sure additional scripts are only executable by owner
+# Make sure additional scripts are only writable by user
 if [ -d $HOME/.bashrc.d ]; then
-    for script in `find $HOME/.bashrc.d/ -type f -perm -u+x,g-w,o-w`; do
+    for script in `find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw`; do
         source $script
     done
 else
