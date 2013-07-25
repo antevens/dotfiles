@@ -52,3 +52,6 @@ if [ -d $HOME/.bashrc.d ]; then
 else
     mkdir $HOME/.bashrc.d && chmod 700 $HOME/.bashrc.d && chmod -R og-wrx $HOME/.bashrc.d
 fi
+
+# Initialize rbenv for multiple ruby environments
+which rbenv >> /dev/null && eval "`rbenv init -`"
