@@ -17,17 +17,7 @@ PS1='\[\033[01;32m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '
 # Some aliases
 alias vi=vim
 
-random_wrapper() {
-    if [ "$1" == "" ]; then
-        echo "Random requires length parameter!"
-        exit 1
-    fi
-    dd if=/dev/urandom bs=$1 count=1 | base64 | sed '$s/.$//'
-}
-
-alias random=random_wrapper
-
-# Set colors for ls and CLI
+# Set colors for ls and CLI on Mac
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
@@ -43,15 +33,16 @@ ghar pull > /dev/null
 ghar install > /dev/null
 
 # Run additional bashrc scipts or if .bashrc.d does not exist
-# create .bashrc.d directory and enforce permissions
-# Make sure additional scripts are only writable by user
+# create .bashrc.d directory
+# Only execute additional .bashrc scripts if they are secure, e.g. owned by the
+# user that is starting bash and not writable by others
 if [ -d $HOME/.bashrc.d ]; then
-    for script in `find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw`; do
+    for script in `find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw` -user $USER; do
         source $script
     done
 else
     mkdir $HOME/.bashrc.d && chmod 700 $HOME/.bashrc.d && chmod -R og-wrx $HOME/.bashrc.d
 fi
 
-# Initialize rbenv for multiple ruby environments
+# If rbenv is installed we initialize rbenv for multiple ruby environments
 which rbenv >> /dev/null && eval "`rbenv init -`"
