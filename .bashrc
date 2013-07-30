@@ -37,7 +37,7 @@ ghar install > /dev/null
 # Only execute additional .bashrc scripts if they are secure, e.g. owned by the
 # user that is starting bash and not writable by others
 if [ -d $HOME/.bashrc.d ]; then
-    for script in `find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw` -user $USER; do
+    for script in `find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw -user $USER`; do
         source $script
     done
 else
