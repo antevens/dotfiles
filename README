@@ -21,5 +21,4 @@ bin/ghar install
 chmod -R u+xg-wo-w $HOME/.bashrc.d/
 
 # Restart Shell
-
 curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
