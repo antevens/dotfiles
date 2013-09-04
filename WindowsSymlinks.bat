@@ -4,4 +4,3 @@ mklink /D %USERPROFILE%\vimfiles %USERPROFILE%\Revisions\ghar\home\.vim
 mklink %USERPROFILE%\.vimrc %USERPROFILE%\Revisions\ghar\home\.vimrc
 
 PAUSE
-
