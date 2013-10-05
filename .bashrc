@@ -5,7 +5,7 @@
 GIT_BASE="${HOME}/Revisions"
 
 # Add Local bin directory and ghar bin directory to path
-export PATH=${PATH}:~/bin/:${GIT_BASE}/ghar/bin/
+export PATH=${PATH}:~/bin:${GIT_BASE}/ghar/bin
 
 # Bash style tab completion for ghar
 ${GIT_BASE}/ghar/ghar-bash-completion.sh
