@@ -29,8 +29,13 @@ git config --global credential.helper cache # Set git to use the credential memo
 git config --global credential.helper 'cache --timeout=3600' # Set the cache to timeout after 1 hour (setting is in seconds)
 git config --global core.editor vim
 
+# Debian maintainer config
 export DEBEMAIL=$EMAIL
 export DEBFULLNAME=$FULL_NAME
+
+# Ubuntu maintainer config
+BZR_EDITOR="vim"
+bzr launchpad-login jarl
 
 # Ghar, store dotfiles in GIT
 # Pull latest on each login
