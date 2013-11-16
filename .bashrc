@@ -28,6 +28,7 @@ git config --global user.email jarl.stefansson@gmail.com
 git config --global credential.helper cache # Set git to use the credential memory cache
 git config --global credential.helper 'cache --timeout=3600' # Set the cache to timeout after 1 hour (setting is in seconds)
 git config --global core.editor vim
+git config --global push.default matching
 
 # Debian maintainer config
 export DEBEMAIL=$EMAIL
@@ -35,7 +36,9 @@ export DEBFULLNAME=$FULL_NAME
 
 # Ubuntu maintainer config
 BZR_EDITOR="vim"
-bzr launchpad-login jarl
+if which bzr > /dev/null; then
+    bzr launchpad-login jarl
+fi
 
 # Ghar, store dotfiles in GIT
 # Pull latest on each login
