@@ -1,4 +1,4 @@
 #!/bin/bash
-# Sets common git aliases
+# Sets common bzr aliases
 
-alias bzr-rzbackup-test "bzr dailydeb --allow-fallback-to-native ~/Revisions/rzbackup/ubuntu/rzbackup.recipe /tmp/daily-build"
+alias bzr-rzbackup-test="bzr dailydeb --allow-fallback-to-native ~/Revisions/rzbackup/ubuntu/rzbackup.recipe /tmp/daily-build"

@@ -59,6 +59,3 @@ fi
 
 # If rbenv is installed we initialize rbenv for multiple ruby environments
 which rbenv >> /dev/null && eval "`rbenv init -`"
-
-# GR tab completion
-. <(gr completion)
