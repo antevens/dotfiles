@@ -1,5 +1,7 @@
+[tar]
+        umask = 0002
 [core]
 	autocrlf = false
 [user]
-	name = Jarl Stefansson
-	email = jarl.stefansson@gmail.com
+	name = Antonia Stevens
+	email = a@antevens.com
