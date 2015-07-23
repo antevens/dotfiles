@@ -5,6 +5,9 @@ FULL_NAME="Jarl Stefansson"
 EMAIL="jarl.stefansson@gmail.com"
 GIT_BASE="${HOME}/Revisions"
 
+# On mac we use vim installed with Cellar/Brew
+if [ `echo "${OSTYPE}" | grep 'darwin'` ]; then alias vim=/usr/local/bin/vim; fi
+
 # Add Local bin directory and ghar bin directory to path
 export PATH=${PATH}:~/bin:${GIT_BASE}/ghar/bin
 
