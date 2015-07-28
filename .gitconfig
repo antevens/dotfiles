@@ -4,4 +4,12 @@
 	autocrlf = false
 [user]
 	name = Antonia Stevens
-	email = a@antevens.com
+        email = a@antevens.com
+[credential]
+        helper = cache --timeout=3600
+[push]
+        default = matching
+[diff]
+        tool = vimdiff
+[merge]
+        tool = vimdiff
