@@ -1,8 +1,8 @@
 #######################################################
-# Jarl Stefanssons .bashrc file
+# Antonia Stevens .bashrc file
 #######################################################a
-FULL_NAME="Jarl Stefansson"
-EMAIL="jarl.stefansson@gmail.com"
+FULL_NAME="Antonia Stevens"
+EMAIL="a@antevens.com"
 GIT_BASE="${HOME}/Revisions"
 
 # On mac we use vim installed with Cellar/Brew
@@ -26,8 +26,8 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Git config
-git config --global user.name "Jarl Stefansson"
-git config --global user.email jarl.stefansson@gmail.com 
+git config --global user.name "Antonia Stevens"
+git config --global user.email a@antevens.com
 git config --global credential.helper cache # Set git to use the credential memory cache
 git config --global credential.helper 'cache --timeout=3600' # Set the cache to timeout after 1 hour (setting is in seconds)
 git config --global core.editor vim
