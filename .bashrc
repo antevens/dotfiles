@@ -6,7 +6,11 @@ EMAIL="a@antevens.com"
 GIT_BASE="${HOME}/Revisions"
 
 # On mac we use vim installed with Cellar/Brew
-if [ `echo "${OSTYPE}" | grep 'darwin'` ]; then alias vim=/usr/local/bin/vim; fi
+# We also want to change the default Java
+if [ `echo "${OSTYPE}" | grep 'darwin'` ]; then
+    alias vim=/usr/local/bin/vim
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_60`
+fi
 
 # Add Local bin directory and ghar bin directory to path
 export PATH=${PATH}:~/bin:${GIT_BASE}/ghar/bin
