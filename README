@@ -25,6 +25,6 @@ curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/
 
 # Update bourne/bash synax highlighting definition on Linux:
 sudo mv /usr/share/vim/vim74/syntax/sh.vim \
-/usr/share/vim/vim74/syntax/sh.vim.old && wget -O - \
+/usr/share/vim/vim7*/syntax/sh.vim.old && wget -O - \
 http://www.drchip.org/astronaut/vim/syntax/sh.vim.gz | gunzip -c | sudo tee \
-/usr/share/vim/vim74/syntax/sh.vim && sudo chmod 644 /usr/share/vim/vim74/syntax/sh.vim
+/usr/share/vim/vim7*/syntax/sh.vim && sudo chmod 644 /usr/share/vim/vim74/syntax/sh.vim
