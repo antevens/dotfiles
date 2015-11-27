@@ -4,7 +4,7 @@
 mkdir -p $HOME/Revisions && cd $HOME/Revisions
 git clone https://github.com/philips/ghar.git
 cd $HOME/Revisions/ghar
-bin/ghar add https://github.com/jalli/dotfiles.git
+bin/ghar add https://github.com/antevens/dotfiles.git
 
 # Do the above command for any additional repos that you want ghar to pull, especially private
 # dotfile repos, bashrc stubs should be located in the .bashrc.d directory in
@@ -22,3 +22,9 @@ chmod -R u+xg-wo-w $HOME/.bashrc.d/
 
 # Restart Shell
 curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+
+# Update bourne/bash synax highlighting definition on Linux:
+sudo mv /usr/share/vim/vim7*/syntax/sh.vim \
+/usr/share/vim/vim7*/syntax/sh.vim.old && wget -O - \
+http://www.drchip.org/astronaut/vim/syntax/sh.vim.gz | gunzip -c | sudo tee \
+/usr/share/vim/vim7*/syntax/sh.vim && sudo chmod 644 /usr/share/vim/vim74/syntax/sh.vim

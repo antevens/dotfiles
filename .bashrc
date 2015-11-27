@@ -1,12 +1,16 @@
 #######################################################
-# Jarl Stefanssons .bashrc file
+# Antonia Stevens .bashrc file
 #######################################################a
-FULL_NAME="Jarl Stefansson"
-EMAIL="jarl.stefansson@gmail.com"
+FULL_NAME="Antonia Stevens"
+EMAIL="a@antevens.com"
 GIT_BASE="${HOME}/Revisions"
 
 # On mac we use vim installed with Cellar/Brew
-if [ `echo "${OSTYPE}" | grep 'darwin'` ]; then alias vim=/usr/local/bin/vim; fi
+# We also want to change the default Java
+if [ `echo "${OSTYPE}" | grep 'darwin'` ]; then
+    alias vim=/usr/local/bin/vim
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_60`
+fi
 
 # Add Local bin directory and ghar bin directory to path
 export PATH=${PATH}:~/bin:${GIT_BASE}/ghar/bin
@@ -26,8 +30,8 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Git config
-git config --global user.name "Jarl Stefansson"
-git config --global user.email jarl.stefansson@gmail.com 
+git config --global user.name "Antonia Stevens"
+git config --global user.email a@antevens.com
 git config --global credential.helper cache # Set git to use the credential memory cache
 git config --global credential.helper 'cache --timeout=3600' # Set the cache to timeout after 1 hour (setting is in seconds)
 git config --global core.editor vim
