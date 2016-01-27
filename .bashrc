@@ -6,10 +6,10 @@ EMAIL="a@antevens.com"
 GIT_BASE="${HOME}/Revisions"
 
 # On mac we use vim installed with Cellar/Brew
-# We also want to change the default Java
+# We also want to change the default Java if present
 if [ `echo "${OSTYPE}" | grep 'darwin'` ]; then
     alias vim=/usr/local/bin/vim
-    export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_60`
+    #export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_60`
 fi
 
 # Add Local bin directory and ghar bin directory to path
@@ -44,7 +44,7 @@ export DEBFULLNAME=$FULL_NAME
 # Ubuntu maintainer config
 BZR_EDITOR="vim"
 if which bzr > /dev/null; then
-    bzr launchpad-login jarl
+    bzr launchpad-login antevens
 fi
 
 # Ghar, store dotfiles in GIT
@@ -56,13 +56,19 @@ ghar install > /dev/null
 # create .bashrc.d directory
 # Only execute additional .bashrc scripts if they are secure, e.g. owned by the
 # user that is starting bash and not writable by others
-if [ -d "$HOME/.bashrc.d" ]; then
-    for script in `find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw -user $USER`; do
-        source $script
+if [ -d "${HOME}/.bashrc.d" ]; then
+    for script in $(find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw -user ${USER}); do
+        source ${script}
     done
 else
-    mkdir $HOME/.bashrc.d && chmod 700 $HOME/.bashrc.d && chmod -R og-wrx $HOME/.bashrc.d
+    mkdir ${HOME}/.bashrc.d && chmod 700 ${HOME}/.bashrc.d && chmod -R og-wrx ${HOME}/.bashrc.d
+fi
+
+# If base virtualenv exists we add it to path and source it
+venv="${HOME}/Virtualenvs/base"
+if [ -d "${venv}" ]; then
+    source "${venv}/bin/activate"
 fi
 
 # If rbenv is installed we initialize rbenv for multiple ruby environments
-which rbenv >> /dev/null && eval "`rbenv init -`"
+which rbenv >> /dev/null && eval "$(rbenv init -)"
