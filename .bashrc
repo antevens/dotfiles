@@ -66,3 +66,7 @@ fi
 
 # If rbenv is installed we initialize rbenv for multiple ruby environments
 which rbenv >> /dev/null && eval "`rbenv init -`"
+
+# Make sure SSH Agent forwarding is enables for linux
+key_file=~/.ssh/id_rsa
+[[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file
