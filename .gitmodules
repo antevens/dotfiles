@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/vim-arduino"]
 	path = .vim/bundle/vim-arduino
 	url = https://github.com/sudar/vim-arduino-syntax
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
