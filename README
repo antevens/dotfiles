@@ -27,7 +27,7 @@ $HOME/Revisions/ghar/bin/ghar install
 chmod -R 750 $HOME/.bashrc.d/
 
 # Restart Shell
-curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+curl -so ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
 
 # Update bourne/bash synax highlighting definition on Linux:
 sudo mv /usr/share/vim/vim7*/syntax/sh.vim \
