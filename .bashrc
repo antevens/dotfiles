@@ -4,6 +4,8 @@
 FULL_NAME="Antonia Stevens"
 EMAIL="a@antevens.com"
 GIT_BASE="${HOME}/Revisions"
+FREEIPA_USER='astevens'
+ANSIBLE_USER='astevens'
 
 # On mac we use vim installed with Cellar/Brew
 # We also want to change the default Java if present

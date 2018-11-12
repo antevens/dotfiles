@@ -31,3 +31,9 @@ sudo mv /usr/share/vim/vim7*/syntax/sh.vim \
 /usr/share/vim/vim7*/syntax/sh.vim.old && wget -O - \
 http://www.drchip.org/astronaut/vim/syntax/sh.vim.gz | gunzip -c | sudo tee \
 /usr/share/vim/vim7*/syntax/sh.vim && sudo chmod 644 /usr/share/vim/vim74/syntax/sh.vim
+
+# Create an ext4 volume for Dropbox
+dd if=/dev/zero of=${HOME}/Dropbox.img bs=1024 count=0 seek=$[1024*1024*2+16*1024]
+mkfs.ext4 -F ${HOME}/Dropbox.img -m 0
+echo ${HOME}/Dropbox.img ${HOME}/Dropbox_ext4      ext4 defaults           0       2 | sudo tee -a /etc/fstab
+sudo mount ${HOME}/Dropbox_ext4/
