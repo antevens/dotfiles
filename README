@@ -5,7 +5,7 @@
 brew install shellcheck || sudo apt-get install shellcheck || sudo dnf install ShellCheck || sudo yum -y install epel-release && sudo yum -y install ShellCheck
 
 # Install golang
-brew install go || apt-get install golang-go || dnf install golang || yum -y golang
+brew install go || sudo apt-get install golang-go || dnf install golang || yum -y golang
 
 mkdir -p $HOME/Revisions && cd $HOME/Revisions
 git clone https://github.com/philips/ghar.git
