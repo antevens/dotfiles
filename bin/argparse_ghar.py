@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# 
+#
 # Local copy of argparse for ghar
 # http://argparse.googlecode.com/files/argparse-1.1.zip
 #
