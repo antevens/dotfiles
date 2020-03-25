@@ -1,5 +1,6 @@
 # Common sense and Ghar files #
 ###############################
+*
 !/bin
 !/bin/*.py
 !README.md
