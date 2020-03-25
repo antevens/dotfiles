@@ -31,6 +31,10 @@ alias vi=vim
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
+# Set bash history size
+HISTSIZE=1000000
+HISTFILESIZE=10000000
+
 # Git config
 git config --global user.name "Antonia Stevens"
 git config --global user.email a@antevens.com
