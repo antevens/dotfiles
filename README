@@ -1,0 +1,42 @@
+# To install dotfiles with ghar execute the following commands, there is also
+# an extra command which is only used on mac to fix a python bug
+
+# Install shellcheck
+brew install shellcheck || sudo apt-get install shellcheck || sudo dnf install ShellCheck || sudo yum -y install epel-release && sudo yum -y install ShellCheck
+
+# Install golang
+brew install go || sudo apt-get install golang-go || dnf install golang || yum -y golang
+
+mkdir -p $HOME/Revisions && cd $HOME/Revisions
+git clone https://github.com/philips/ghar.git
+cd $HOME/Revisions/ghar
+bin/ghar add https://github.com/antevens/dotfiles.git
+
+# Do the above command for any additional repos that you want ghar to pull, especially private
+# dotfile repos, bashrc stubs should be located in the .bashrc.d directory in
+# the repos
+
+cd $HOME/Revisions/ghar/dotfiles
+git submodule init && git submodule update
+$HOME/Revisions/ghar/bin/ghar install
+
+# On Mac
+    sudo mkdir -p /usr/include/python2.7
+    sudo ln -s /System/Library/Frameworks/Python.framework/Versions/Current/include/python2.7/pyconfig.h /usr/include/python2.7/pyconfig.h
+
+chmod -R 750 $HOME/.bashrc.d/
+
+# Restart Shell
+curl -so ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+
+# Update bourne/bash synax highlighting definition on Linux:
+sudo mv /usr/share/vim/vim7*/syntax/sh.vim \
+/usr/share/vim/vim7*/syntax/sh.vim.old && wget -O - \
+http://www.drchip.org/astronaut/vim/syntax/sh.vim.gz | gunzip -c | sudo tee \
+/usr/share/vim/vim7*/syntax/sh.vim && sudo chmod 644 /usr/share/vim/vim74/syntax/sh.vim
+
+# Create an ext4 volume for Dropbox
+dd if=/dev/zero of=${HOME}/Dropbox.img bs=1024 count=0 seek=$[1024*1024*2+16*1024]
+mkfs.ext4 -F ${HOME}/Dropbox.img -m 0
+echo ${HOME}/Dropbox.img ${HOME}/Dropbox_ext4      ext4 defaults           0       2 | sudo tee -a /etc/fstab
+sudo mount ${HOME}/Dropbox_ext4/

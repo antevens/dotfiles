@@ -1,0 +1,20 @@
+"amixer -q set Master 2- unmute && ~/media_key_scripts/pulseaudiomodify.sh decrease"
+XF86AudioLowerVolume
+
+"amixer -q set Master 2+ unmute && ~/media_key_scripts/pulseaudiomodify.sh increase"
+XF86AudioRaiseVolume
+
+"~/media_key_scripts/alsa-sound.sh mute && ~/media_key_scripts/pulseaudiomodify.sh mute"
+XF86AudioMute
+
+"~/media_key_scripts/audio_control.sh --play-pause"
+XF86AudioPlay
+
+"~/media_key_scripts/audio_control.sh --stop"
+XF86AudioStop
+
+"~/media_key_scripts/audio_control.sh -r"
+XF86AudioPrev
+
+"~/media_key_scripts/audio_control.sh -f"
+XF86AudioNext
