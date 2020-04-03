@@ -1,25 +1,18 @@
 section: screens
 	linux:
-		halfDuplexCapsLock = true
-		halfDuplexNumLock = false
-		halfDuplexScrollLock = false
-		xtestIsXineramaUnaware = false
-		switchCorners = none
-		switchCornerSize = 0
-	win:
-		halfDuplexCapsLock = true
-		halfDuplexNumLock = false
-		halfDuplexScrollLock = false
-		xtestIsXineramaUnaware = false
-		switchCorners = none
-		switchCornerSize = 0
-                meta = altgr
-                altgr = shift
-	anthill:
 		halfDuplexCapsLock = false
 		halfDuplexNumLock = false
 		halfDuplexScrollLock = false
 		xtestIsXineramaUnaware = false
+		preserveFocus = false
+		switchCorners = none
+		switchCornerSize = 0
+	Win10LTSB:
+		halfDuplexCapsLock = true
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		preserveFocus = false
 		switchCorners = none
 		switchCornerSize = 0
 end
@@ -29,12 +22,9 @@ end
 
 section: links
 	linux:
-		right = win
-	win:
-		right = anthill
+		right = Win10LTSB
+	Win10LTSB:
 		left = linux
-	anthill:
-		left = win
 end
 
 section: options
