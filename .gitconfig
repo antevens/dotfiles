@@ -4,7 +4,7 @@
 	autocrlf = false
 [user]
 	name = Antonia Stevens
-        email = a@antevens.com
+        email = a@ant.st
 [credential]
         helper = cache --timeout=3600
 [push]
