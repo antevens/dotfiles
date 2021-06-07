@@ -2,23 +2,14 @@
 # Antonia Stevens .bashrc file
 #######################################################a
 FULL_NAME="Antonia Stevens"
-EMAIL="a@antevens.com"
+EMAIL="a@ant.st"
 GIT_BASE="${HOME}/Revisions"
-FREEIPA_USER='astevens'
-ANSIBLE_USER='astevens'
-
-# On mac we use vim installed with Cellar/Brew
-# We also want to change the default Java if present
-if [ `echo "${OSTYPE}" | grep 'darwin'` ]; then
-    alias vim=/usr/local/bin/vim
-    #export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_60`
-fi
 
 # Add Local bin directory and ghar bin directory to path
 export PATH=${PATH}:~/bin:~/go/bin:/usr/local/go/bin:${GIT_BASE}/ghar/bin
 
 # Bash style tab completion for ghar
-${GIT_BASE}/ghar/ghar-bash-completion.sh
+"${GIT_BASE}/ghar/ghar-bash-completion.sh"
 
 # Use proper prompts for RHEL/Centos/Fedora boxes
 export PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME}" "${PWD/#$HOME/~}"'
@@ -37,7 +28,7 @@ HISTFILESIZE=10000000
 
 # Git config
 git config --global user.name "Antonia Stevens"
-git config --global user.email a@antevens.com
+git config --global user.email a@ant.st
 git config --global credential.helper cache # Set git to use the credential memory cache
 git config --global credential.helper 'cache --timeout=3600' # Set the cache to timeout after 1 hour (setting is in seconds)
 git config --global core.editor vim
@@ -48,8 +39,8 @@ export DEBEMAIL=$EMAIL
 export DEBFULLNAME=$FULL_NAME
 
 # Ubuntu maintainer config
-BZR_EDITOR="vim"
-if which bzr > /dev/null; then
+export BZR_EDITOR="vim"
+if command -v bzr > /dev/null; then
     bzr launchpad-login antevens
 fi
 
@@ -64,10 +55,10 @@ ghar install > /dev/null
 # user that is starting bash and not writable by others
 if [ -d "${HOME}/.bashrc.d" ]; then
     for script in $(find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw -user ${USER}); do
-        source ${script}
+        source "${script}"
     done
 else
-    mkdir ${HOME}/.bashrc.d && chmod 700 ${HOME}/.bashrc.d && chmod -R og-wrx ${HOME}/.bashrc.d
+    mkdir "${HOME}/.bashrc.d" && chmod 700 "${HOME}/.bashrc.d" && chmod -R og-wrx "${HOME}/.bashrc.d"
 fi
 
 # If base virtualenv exists we add it to path and source it
@@ -77,7 +68,7 @@ if [ -d "${venv}" ]; then
 fi
 
 # If rbenv is installed we initialize rbenv for multiple ruby environments
-which rbenv >> /dev/null && eval "$(rbenv init -)"
+command -v rbenv >> /dev/null && eval "$(rbenv init -)"
 
 # Make sure SSH Agent forwarding is enables for linux
 key_file=~/.ssh/id_rsa
