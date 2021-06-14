@@ -1,3 +1,53 @@
+antevens dotfiles (based on ghar)
+================================
+
+# To install dotfiles with ghar execute the following commands, there is also
+# an extra command which is only used on mac to fix a python bug
+
+# Install python
+brew install python3 || sudo apt-get install python3 || sudo dnf install python3 || sudo yum -y install python3
+
+# Configure python3 as default python on Ubuntu/Mint
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+
+# Install shellcheck
+brew install shellcheck || sudo apt-get install shellcheck || sudo dnf install ShellCheck || sudo yum -y install epel-release && sudo yum -y install ShellCheck
+
+# Install golang
+brew install go || sudo apt-get install golang-go || dnf install golang || yum -y golang
+
+# Install ghar / dotfiles
+mkdir -p $HOME/Revisions && cd $HOME/Revisions
+git clone https://github.com/antevens/dotfiles.git
+cd $HOME/Revisions/dotfiles
+bin/ghar add https://github.com/antevens/dotfiles.git
+
+# Do the above command for any additional repos that you want ghar to pull, especially private
+# dotfile repos, bashrc stubs should be located in the .bashrc.d directory in
+# the repos
+
+cd $HOME/Revisions/ghar/dotfiles
+git submodule init && git submodule update
+$HOME/Revisions/ghar/bin/ghar install
+
+chmod -R 750 $HOME/.bashrc.d/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ghar (ghar: home as repositories)
 =================================
 
