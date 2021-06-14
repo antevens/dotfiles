@@ -1,0 +1,35 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.vim:
+    ~/.vimrc:
+    ~/.bash_profile:
+    ~/.bashrc:
+    ~/.bashrc.d:
+    ~/bin:
+    ~/.config:
+    ~/.flake8:
+    ~/.fonts:
+    ~/.gitconfig:
+    ~/.gitignore:
+    ~/.gitmodules:
+    ~/.gtkrc-xfce:
+    ~/kicad:
+    ~/.pbuilderrc:
+    ~/.pypirc:
+    ~/.screenrc:
+    ~/.xbindkeysrc:
+    ~/.xinitrc:
+    ~/x.map:
+    ~/.Xmodmap:
+    ~/.Xresources:
+
+- create:
+    - ~/tmp
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
