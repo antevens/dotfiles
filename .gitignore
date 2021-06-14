@@ -1,11 +1,9 @@
-# Common sense and Ghar files #
+# Common sense #
 ###############################
-*
 !/bin
 !/bin/*.py
 !README.md
 !COPYING
-!ghar-bash-completion.sh
 
 # Compiled source #
 ###################
@@ -16,6 +14,7 @@
 *.o
 *.so
 *.pyc
+*.pyo
 
 # Packages #
 ############
