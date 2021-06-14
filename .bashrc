@@ -73,3 +73,6 @@ command -v rbenv >> /dev/null && eval "$(rbenv init -)"
 # Make sure SSH Agent forwarding is enables for linux
 key_file=~/.ssh/id_rsa
 [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file
+
+# Set up Go env
+export GOPATH="${HOME}/Revisions"
