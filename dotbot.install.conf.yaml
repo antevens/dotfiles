@@ -6,19 +6,29 @@
 
 - link:
     ~/.vim:
+      create: true
+      path: vim/*
+      glob: true
     ~/.vimrc:
     ~/.bash_profile:
     ~/.bashrc:
     ~/.bashrc.d:
+      create: true
+      path: bashrc.d/*
+      glob: true
     ~/bin:
-    ~/.config:
+      create: true
+      path: bin/*
+      glob: true
     ~/.flake8:
     ~/.fonts:
     ~/.gitconfig:
     ~/.gitignore:
-    ~/.gitmodules:
     ~/.gtkrc-xfce:
     ~/kicad:
+        create: true
+        path: kicad
+        glob: true
     ~/.pbuilderrc:
     ~/.pypirc:
     ~/.screenrc:
