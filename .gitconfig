@@ -1,7 +1,8 @@
 [tar]
         umask = 0002
 [core]
-	autocrlf = false
+        autocrlf = false
+        editor = vim
 [user]
 	name = Antonia Stevens
         email = a@ant.st
