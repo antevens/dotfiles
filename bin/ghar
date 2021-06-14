@@ -148,7 +148,7 @@ class Repo:
         found_one = False
         for f in l:
             # global .gitconfig as a config is OK but not .git/ or .gitignore
-            if re.match("^\.git(ignore|modules)?$", f) or re.match("^\README.*$", f) or re.match("^\.travis.yml", f):
+            if re.match("^\.git(ignore|modules)?$", f) or re.match("^README.*$", f) or re.match("^\.travis.yml", f):
                 self.ls.remove(f)
             elif re.match("^\..+$", f):
                 found_one = True
@@ -199,7 +199,8 @@ class Repo:
                 new_path = os.path.join(path, fname)
                 dir_links += self.list_directory_links(new_path)
             elif link_status.startswith("link to "):
-                print ("%s: can't handle non-ghar symlinks." % fname)
+                print ("Linking %s to %s: can't handle non-ghar symlinks." %
+                       (link, os.path.join(path, fname)))
             else:
                 dir_links.append(Link(os.path.join(path, fname), base=self.path, ignore=self.ignore))
         return dir_links
