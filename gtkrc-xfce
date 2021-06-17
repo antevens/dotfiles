@@ -4,6 +4,13 @@ style "xfdesktop-icon-view" {
     fg[NORMAL] = "#ffffff"
     fg[SELECTED] = "#00ff00"
     fg[ACTIVE] = "#0000ff"
+
+    XfdesktopIconView::shadow-x-offset = 1
+    XfdesktopIconView::shadow-y-offset = 1
+    XfdesktopIconView::shadow-color = "#3c3c3c"
+    XfdesktopIconView::selected-shadow-x-offset = 1
+    XfdesktopIconView::selected-shadow-y-offset = 1
+    XfdesktopIconView::selected-shadow-color = "#3c3c3c"
+
 }
 widget_class "*XfdesktopIconView*" style "xfdesktop-icon-view"
-

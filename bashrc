@@ -53,9 +53,12 @@ if [ -d "${venv}" ]; then
     source "${venv}/bin/activate"
 fi
 
-# Make sure SSH Agent forwarding is enables for linux
-key_file=~/.ssh/id_rsa
-[[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file
+# Make sure SSH Agent forwarding is enabled and all keys loaded
+eval $(ssh-agent -s)
+key_files=(~/.ssh/id_rsa ~/.ssh/plotly)
+for key in "${key_files[@]}"; do
+    [[ -z $(ssh-add -L | grep "${key}") ]] && ssh-add "${key}"
+done
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
