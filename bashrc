@@ -55,7 +55,7 @@ fi
 
 # Make sure SSH Agent forwarding is enabled and all keys loaded
 eval $(ssh-agent -s)
-key_files=(~/.ssh/id_rsa ~/.ssh/plotly)
+key_files=(~/.ssh/id_ant ~/.ssh/id_expeto)
 for key in "${key_files[@]}"; do
     [[ -z $(ssh-add -L | grep "${key}") ]] && ssh-add "${key}"
 done
