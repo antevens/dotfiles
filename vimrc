@@ -139,11 +139,12 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" OUTDATED, repleced with native manager in vim 8.0
 " Setup Pathogen to manage your plugins
 " mkdir -p ~/.vim/autoload ~/.vim/bundle
 " curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
 " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
-call pathogen#infect()
+" call pathogen#infect()
 
 " Python-mode settings
 let g:pymode_run_key = 'R'
