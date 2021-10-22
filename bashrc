@@ -11,20 +11,6 @@ case $- in
       *) return;;
 esac
 
-# Some aliases
-alias vi=vim
-
-# SSH agent start & set variables
-alias ssh-agent='eval $(/usr/bin/ssh-agent)'
-
-key_files="$(ls ${HOME}/.ssh/id_* | xargs file | grep 'OpenSSH private key' | awk -F: '{print $1}')"
-for key in "${key_files[@]}"; do
-    echo "Adding alias for ssh-key ${key}"
-    basename="${key##*/}"
-    alias "ssh-add-${basename}"="ssh-add '${key}'"
-done
-
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -35,16 +21,6 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=100000
 HISTFILESIZE=200000
-
-# Debian maintainer config
-export DEBEMAIL="${EMAIL}"
-export DEBFULLNAME="${FULL_NAME}"
-
-# Ubuntu maintainer config
-export BZR_EDITOR="vim"
-if command -v bzr > /dev/null; then
-    bzr launchpad-login antevens
-fi
 
 # Run additional bashrc scipts or if .bashrc.d does not exist
 # create .bashrc.d directory
@@ -62,22 +38,6 @@ fi
 venv="${HOME}/Virtualenvs/base"
 if [ -d "${venv}" ]; then
     source "${venv}/bin/activate"
-fi
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# Make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# Set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # Set a fancy prompt (non-color, unless we know we "want" color)
@@ -117,37 +77,15 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 # Colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f "${HOME}/.bash_aliases" ]; then
+    source "${HOME}/.bash_aliases"
 fi
 
 # Enable programmable completion features (you don't need to enable
