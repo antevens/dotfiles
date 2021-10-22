@@ -148,13 +148,14 @@ set noswapfile
 
 " Python-mode settings
 let g:pymode_run_key = 'R'
-
 " Load show documentation plugin
 let g:pymode_doc = 1
 " Key for show python documentation
- let g:pymode_doc_key = 'K'
-
+let g:pymode_doc_key = 'K'
+" Other pyode settins
 let g:pymode_syntax = 1
+let g:pymode_python='python3'
+let g:pymode_indent = 1
 
 " Determine filetype and indent rules
 filetype on
@@ -171,3 +172,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+
+" Set narrow indent lines
+let g:indentLine_char = '⦙'
+
+" Set spacing for yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab

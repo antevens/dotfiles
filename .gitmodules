@@ -14,3 +14,6 @@
 [submodule "vim/pack/start/vim-airline"]
 	path = vim/pack/native/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline
+[submodule "vim/pack/native/start/indentLine"]
+	path = vim/pack/native/start/indentLine
+	url = https://github.com/Yggdroot/indentLine.git
