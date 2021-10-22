@@ -17,6 +17,14 @@ alias vi=vim
 # SSH agent start & set variables
 alias ssh-agent='eval $(/usr/bin/ssh-agent)'
 
+key_files="$(ls ${HOME}/.ssh/id_* | xargs file | grep 'OpenSSH private key' | awk -F: '{print $1}')"
+for key in "${key_files[@]}"; do
+    echo "Adding alias for ssh-key ${key}"
+    basename="${key##*/}"
+    alias "ssh-add-${basename}"="ssh-add '${key}'"
+done
+
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
