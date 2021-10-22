@@ -4,11 +4,20 @@ alias vi=vim
 # SSH agent aliases
 alias ssh-agent='eval $(/usr/bin/ssh-agent)'
 
-key_files="$(ls ${HOME}/.ssh/id_* | xargs file | grep 'OpenSSH private key' | awk -F: '{print $1}')"
+# Alias for each key
+key_files=($(find ${HOME}/.ssh/ -name 'id_*' | xargs file | grep 'OpenSSH private key' | awk -F: '{print $1}'))
 for key in "${key_files[@]}"; do
     echo "Adding alias for ssh-key ${key}"
     basename="${key##*/}"
     alias "ssh-add-${basename}"="ssh-add '${key}'"
+done
+
+# Alias for each virtualenv
+virtual_envs=($(find "${HOME}/Virtualenvs" -maxdepth 1 -type d ))
+for venv in "${virtual_envs[@]}"; do
+    echo "Adding alias for Virtualenv ${venv}"
+    basename="${venv##*/}"
+    alias "venv-${basename}"="source ${venv}/bin/activate"
 done
 
 # Directory/File listing
