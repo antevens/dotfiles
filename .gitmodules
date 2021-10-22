@@ -1,16 +1,16 @@
 [submodule ".vim/bundle/python-mode"]
-	path = vim/pack/start/python-mode
+	path = vim/pack/native/start/python-mode
 	url = git@github.com:python-mode/python-mode.git
 [submodule ".vim/bundle/vim-arduino"]
-	path = vim/pack/start/vim-arduino
+	path = vim/pack/native/start/vim-arduino
 	url = https://github.com/sudar/vim-arduino-syntax
 [submodule ".vim/bundle/syntastic"]
-	path = vim/pack/start/syntastic
+	path = vim/pack/native/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/antevens/dotbot
 	ignore = dirty
 [submodule "vim/pack/start/vim-airline"]
-	path = vim/pack/start/vim-airline
+	path = vim/pack/native/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline
