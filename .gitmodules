@@ -1,15 +1,6 @@
-[submodule "vimfiles/bundle/python-mode"]
-	path = vimfiles/bundle/python-mode
-	url = git@github.com:python-mode/python-mode.git
-[submodule "vimfiles/bundle/vim-powerline"]
-	path = vimfiles/bundle/vim-powerline
-    url = https://github.com/Lokaltog/vim-powerline.git
 [submodule ".vim/bundle/python-mode"]
 	path = vim/pack/native/python-mode
 	url = git@github.com:python-mode/python-mode.git
-[submodule ".vim/bundle/vim-powerline"]
-	path = vim/pack/native/vim-powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule ".vim/bundle/vim-arduino"]
 	path = vim/pack/native/vim-arduino
 	url = https://github.com/sudar/vim-arduino-syntax
