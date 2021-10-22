@@ -13,7 +13,7 @@ for key in "${key_files[@]}"; do
 done
 
 # Alias for each virtualenv
-virtual_envs=($(find "${HOME}/Virtualenvs" -maxdepth 1 -type d ))
+virtual_envs=($(find "${HOME}/Virtualenvs" -maxdepth 1 -mindepth 1 -type d ))
 for venv in "${virtual_envs[@]}"; do
     echo "Adding alias for Virtualenv ${venv}"
     basename="${venv##*/}"
