@@ -5,6 +5,9 @@ FULL_NAME="Antonia Stevens"
 EMAIL="a@ant.st"
 GIT_BASE="${HOME}/Revisions"
 
+# Turn off escaping on variables with tab complete
+shopt -s direxpand
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;

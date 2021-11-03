@@ -149,7 +149,7 @@ set noswapfile
 " Python-mode settings
 let g:pymode_run_key = 'R'
 " Load show documentation plugin
-let g:pymode_doc = 1
+"let g:pymode_doc = 1
 " Key for show python documentation
 let g:pymode_doc_key = 'K'
 " Other pyode settins

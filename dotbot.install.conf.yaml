@@ -21,6 +21,7 @@
       create: true
       path: bin/*
       glob: true
+    ~/.config/xfce4/terminal/accels.scm:
     ~/.flake8:
     ~/.fonts:
     ~/.gitconfig:
