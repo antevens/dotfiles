@@ -101,3 +101,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Get kubectl completion
+if command -v kubectl > /dev/null ; then
+    source <(kubectl completion bash)
+fi
