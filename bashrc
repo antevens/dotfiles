@@ -106,3 +106,6 @@ fi
 if command -v kubectl > /dev/null ; then
     source <(kubectl completion bash)
 fi
+
+# Set chrome executable to vivaldi for flutter
+CHROME_EXECUTABLE=vivaldi
