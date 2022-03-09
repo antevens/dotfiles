@@ -109,3 +109,4 @@ fi
 
 # Set chrome executable to vivaldi for flutter
 CHROME_EXECUTABLE=vivaldi
+. "$HOME/.cargo/env"

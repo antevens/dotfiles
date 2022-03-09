@@ -62,6 +62,7 @@ passwd
 .history
 .viminfo
 .bash_history
+.git-credentials
 _viminfo
 id_dsa
 id_rsa
