@@ -1,6 +1,3 @@
-[submodule ".vim/bundle/python-mode"]
-	path = vim/pack/native/start/python-mode
-	url = git@github.com:python-mode/python-mode.git
 [submodule ".vim/bundle/vim-arduino"]
 	path = vim/pack/native/start/vim-arduino
 	url = https://github.com/sudar/vim-arduino-syntax
@@ -17,3 +14,6 @@
 [submodule "vim/pack/native/start/indentLine"]
 	path = vim/pack/native/start/indentLine
 	url = https://github.com/Yggdroot/indentLine.git
+[submodule "vim/pack/native/start/jedi-vim"]
+	path = vim/pack/native/start/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git

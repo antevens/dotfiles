@@ -146,17 +146,6 @@ set noswapfile
 " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
 " call pathogen#infect()
 
-" Python-mode settings
-let g:pymode_run_key = 'R'
-" Load show documentation plugin
-"let g:pymode_doc = 1
-" Key for show python documentation
-let g:pymode_doc_key = 'K'
-" Other pyode settins
-let g:pymode_syntax = 1
-let g:pymode_python='python3'
-let g:pymode_indent = 1
-
 " Determine filetype and indent rules
 filetype on
 filetype plugin indent on
