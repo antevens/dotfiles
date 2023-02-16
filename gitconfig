@@ -20,3 +20,5 @@
 	directory = /home/ant/Revisions/armbian
 	directory = /home/ant/Revisions/armbian
 	directory = /home/ant/Revisions/armbian
+[protocol "file"]
+	allow = always
