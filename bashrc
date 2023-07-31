@@ -107,6 +107,8 @@ if command -v kubectl > /dev/null ; then
     source <(kubectl completion bash)
 fi
 
+# Disable/Enable XFCE features
+xfconf-query --set false --channel xfwm4 --property /general/zoom_desktop
+
 # Set chrome executable to vivaldi for flutter
 CHROME_EXECUTABLE=vivaldi
-. "$HOME/.cargo/env"
