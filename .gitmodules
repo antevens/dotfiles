@@ -17,3 +17,6 @@
 [submodule "vim/pack/native/start/jedi-vim"]
 	path = vim/pack/native/start/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "vim/pack/themes/start/vim-code-dark"]
+	path = vim/pack/themes/start/vim-code-dark
+	url = https://github.com/tomasiser/vim-code-dark

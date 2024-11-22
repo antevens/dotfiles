@@ -4,8 +4,8 @@ index-servers =
     pypitest
 
 [pypi]
-username:Jarl.Stefansson
+username:atevens
 
 [pypitest]
 repository: https://testpypi.python.org/pypi
-username: Jarl.Stefansson
+username: antevens

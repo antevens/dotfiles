@@ -1,6 +1,10 @@
 # Editors
 alias vi=vim
 
+# Kubernetes
+alias k=kubectl
+alias ht=helm
+
 # SSH agent aliases
 alias ssh-agent='eval $(/usr/bin/ssh-agent)'
 
@@ -9,7 +13,7 @@ key_files=($(find ${HOME}/.ssh/ -name 'id_*' | xargs file | grep 'OpenSSH privat
 for key in "${key_files[@]}"; do
     echo "Adding alias for ssh-key ${key}"
     basename="${key##*/}"
-    alias "ssh-add-${basename}"="ssh-add '${key}'"
+    alias "sad-${basename}"="ssh-add '${key}'"
 done
 
 # Alias for each virtualenv

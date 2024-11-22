@@ -34,10 +34,16 @@ set mat=2
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
+" Force background to None regardless of colorscheme
+autocmd ColorScheme * highlight Normal ctermbg=None
+autocmd ColorScheme * highlight NonText ctermbg=None
+
 " Enable syntax highlighting
 syntax enable
 " Color Scheme
+" let g:codedark_transparent=1
 colorscheme desert
+" colorscheme codedark
 set background=dark
 
 " Set utf8 as standard encoding and en_US as the standard language
