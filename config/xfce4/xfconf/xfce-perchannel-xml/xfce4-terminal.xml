@@ -5,7 +5,7 @@
   <property name="background-darkness" type="double" value="1"/>
   <property name="color-background" type="string" value="#000000000000"/>
   <property name="color-cursor" type="string" value="#93a1a1"/>
-  <property name="color-palette" type="string" value="rgb(7,54,66);rgb(220,50,47);rgb(133,153,0);rgb(181,137,0);rgb(38,139,210);rgb(211,54,130);rgb(42,161,152);rgb(238,232,213);rgb(0,43,54);rgb(203,75,22);rgb(0,170,0);rgb(46,194,126);rgb(143,240,164);rgb(108,113,196);rgb(147,161,161);rgb(253,246,227)"/>
+  <property name="color-palette" type="string" value="rgb(7,54,66);rgb(220,50,47);rgb(133,153,0);rgb(181,137,0);rgb(38,139,210);rgb(211,54,130);rgb(42,161,152);rgb(238,232,213);rgb(0,43,54);rgb(203,75,22);rgb(53,132,228);rgb(248,228,92);rgb(52,204,43);rgb(108,113,196);rgb(192,97,203);rgb(253,246,227)"/>
   <property name="font-name" type="string" value="Monospace 10"/>
   <property name="misc-always-show-tabs" type="bool" value="false"/>
   <property name="misc-bell" type="bool" value="false"/>
@@ -14,7 +14,7 @@
   <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
   <property name="scrolling-unlimited" type="bool" value="true"/>
   <property name="misc-default-geometry" type="string" value="400x120"/>
-  <property name="color-foreground" type="string" value="#3333d1d17a7a"/>
+  <property name="color-foreground" type="string" value="#5757e3e38989"/>
   <property name="color-background-vary" type="bool" value="false"/>
   <property name="color-cursor-foreground" type="string" value=""/>
   <property name="color-cursor-use-default" type="bool" value="true"/>
