@@ -14,7 +14,7 @@
   <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
   <property name="scrolling-unlimited" type="bool" value="true"/>
   <property name="misc-default-geometry" type="string" value="400x120"/>
-  <property name="color-foreground" type="string" value="#5757e3e38989"/>
+  <property name="color-foreground" type="string" value="#8f8ff0f0a4a4"/>
   <property name="color-background-vary" type="bool" value="false"/>
   <property name="color-cursor-foreground" type="string" value=""/>
   <property name="color-cursor-use-default" type="bool" value="true"/>
