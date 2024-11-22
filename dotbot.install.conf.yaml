@@ -22,6 +22,11 @@
       path: bin/*
       glob: true
     ~/.config/xfce4/terminal/accels.scm:
+      path: config/xfce4/terminal/accels.scm
+      create: true
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml:
+      path: config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+      create: true
     ~/.flake8:
     ~/.fonts:
     ~/.gitconfig:
