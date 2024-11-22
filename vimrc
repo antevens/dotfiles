@@ -42,8 +42,10 @@ autocmd ColorScheme * highlight NonText ctermbg=None
 syntax enable
 " Color Scheme
 " let g:codedark_transparent=1
-colorscheme desert
-" colorscheme codedark
+"colorscheme desert
+"colorscheme gruvbox
+"colorscheme codedark
+colorscheme everforest
 set background=dark
 
 " Set utf8 as standard encoding and en_US as the standard language
