@@ -1,9 +1,9 @@
 #######################################################
 # Antonia Stevens .bashrc file
 #######################################################a
-FULL_NAME="Antonia Stevens"
-EMAIL="a@ant.st"
-GIT_BASE="${HOME}/Revisions"
+export FULL_NAME="Antonia Stevens"
+export EMAIL="a@ant.st"
+export GIT_BASE="${HOME}/Revisions"
 
 # Turn off escaping on variables with tab complete
 shopt -s direxpand
@@ -14,6 +14,11 @@ case $- in
       *) return;;
 esac
 
+# Include local bin dir in path
+if [[ -d ${HOME}/bin ]] ; then
+    export PATH="${HOME}/bin:${PATH}"
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -22,15 +27,15 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=100000
-HISTFILESIZE=200000
+HISTSIZE=10000000
+HISTFILESIZE=20000000
 
 # Run additional bashrc scipts or if .bashrc.d does not exist
 # create .bashrc.d directory
 # Only execute additional .bashrc scripts if they are secure, e.g. owned by the
 # user that is starting bash and not writable by others
 if [ -d "${HOME}/.bashrc.d" ]; then
-    for script in $(find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw -user ${USER}); do
+    for script in $(find $HOME/.bashrc.d/ -type f -perm -g-xw,o-xw -user "${USER}"); do
         source "${script}"
     done
 else
@@ -107,8 +112,13 @@ if command -v kubectl > /dev/null ; then
     source <(kubectl completion bash)
 fi
 
+# Get kubebuilder completion
+if command -v kubectl > /dev/null ; then
+    source <(kubebuilder completion bash)
+fi
+
 # Disable/Enable XFCE features
 xfconf-query --set false --channel xfwm4 --property /general/zoom_desktop
 
 # Set chrome executable to vivaldi for flutter
-CHROME_EXECUTABLE=vivaldi
+export CHROME_EXECUTABLE=vivaldi

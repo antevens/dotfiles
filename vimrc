@@ -176,3 +176,6 @@ let g:indentLine_char = '⦙'
 " Set spacing for yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd BufRead,BufNewFile *.tpl set filetype=yaml
+
+" Increase max memory for pattern matching
+set maxmempattern=2000000
