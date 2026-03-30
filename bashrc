@@ -125,3 +125,4 @@ export CHROME_EXECUTABLE=vivaldi
 
 # Enable LXC sandboxing gor Gemini
 export GEMINI_SANDBOX=lxc
+export GEMINI_SANDBOX_IMAGE=gemini-sandbox
