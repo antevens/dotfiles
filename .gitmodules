@@ -26,3 +26,6 @@
 [submodule "vim/pack/themes/start/everforest"]
 	path = vim/pack/themes/start/everforest
 	url = https://github.com/sainnhe/everforest.git
+[submodule "vim/pack/native/start/vim-go"]
+	path = vim/pack/native/start/vim-go
+	url = https://github.com/fatih/vim-go.git

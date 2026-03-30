@@ -26,3 +26,4 @@
 	process = git-lfs filter-process
 [init]
 	defaulBranch = main
+	defaultBranch = main

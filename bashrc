@@ -122,3 +122,6 @@ xfconf-query --set false --channel xfwm4 --property /general/zoom_desktop
 
 # Set chrome executable to vivaldi for flutter
 export CHROME_EXECUTABLE=vivaldi
+
+# Enable LXC sandboxing gor Gemini
+export GEMINI_SANDBOX=lxc
