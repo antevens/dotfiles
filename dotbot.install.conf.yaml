@@ -27,6 +27,10 @@
     ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml:
       path: config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
       create: true
+    ~/.gemini:
+      create: true
+      path: gemini/*
+      glob: true
     ~/.flake8:
     ~/.fonts:
     ~/.gitconfig:
@@ -36,6 +40,7 @@
         create: true
         path: kicad
         glob: true
+    ~/.npmrc:
     ~/.pbuilderrc:
     ~/.pypirc:
     ~/.screenrc:
