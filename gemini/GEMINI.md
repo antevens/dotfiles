@@ -17,8 +17,9 @@
 ## Gemini Added Memories
 - Do not commit or push changes without explicit user approval.
 - The user wants me to ask for confirmation before making any changes to their projects.
-- The user prefers to keyword based function definitions in shell scripts.
-- The user prefers the google shell style guide for shell scripts.
+- The user prefers bash over bourne and zsh shells
+- The user requires to keyword based function definitions in shell scripts.
+- The user requires the google shell style guide for shell scripts.
 - The user prefers all internal variables in shell scripts be lower case but
   all external/environment variables be upper case.
 - The user prefers all shell scripts pass a shellcheck syntax check.

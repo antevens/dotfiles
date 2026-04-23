@@ -124,5 +124,7 @@ xfconf-query --set false --channel xfwm4 --property /general/zoom_desktop
 export CHROME_EXECUTABLE=vivaldi
 
 # Enable LXC sandboxing gor Gemini
+# Don't forget to tag the image locally, e.g.
+# docker tag us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.35.3 gemini-sandbox
 export GEMINI_SANDBOX=lxc
-#export GEMINI_SANDBOX_IMAGE=gemini-sandbox
+export GEMINI_SANDBOX_IMAGE=gemini-sandbox
