@@ -19,10 +19,6 @@ esac
 if [[ -d ${HOME}/bin ]] ; then
     export PATH="${HOME}/bin:${PATH}"
 fi
-# Include devcontainers bin dir in path
-if [[ -d ${HOME}/.devcontainers/bin ]] ; then
-    export PATH="${HOME}/.devcontainers/bin:${PATH}"
-fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -115,18 +111,6 @@ if ! shopt -oq posix; then
   elif [[ -f /etc/bash_completion ]]; then
     . /etc/bash_completion
   fi
-fi
-
-# Get kubectl completion
-if command -v kubectl > /dev/null ; then
-   # shellcheck disable=1090,1091
-   source <(kubectl completion bash)
-fi
-
-# Get kubebuilder completion
-if command -v kubectl > /dev/null ; then
-   # shellcheck disable=1090,1091
-   source <(kubebuilder completion bash)
 fi
 
 # Disable/Enable XFCE features

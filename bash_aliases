@@ -3,7 +3,7 @@ alias vi=vim
 
 # Kubernetes
 alias k=kubectl
-alias ht=helm
+alias h=helm
 
 # SSH agent aliases
 alias ssh-agent='eval $(/usr/bin/ssh-agent)'
@@ -33,7 +33,7 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# enable color support of ls and also add handy aliases
+# Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'

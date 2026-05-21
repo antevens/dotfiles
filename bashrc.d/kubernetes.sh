@@ -9,6 +9,14 @@ if command -v kubectl > /dev/null ; then
     done
 fi
 
-if command -v helm > /dev/null ; then
-    alias h=helm
+# Get kubectl completion
+if command -v kubectl > /dev/null ; then
+   # shellcheck disable=1090,1091
+   source <(kubectl completion bash)
+fi
+
+# Get kubebuilder completion
+if command -v kubectl > /dev/null ; then
+   # shellcheck disable=1090,1091
+   source <(kubebuilder completion bash)
 fi
