@@ -27,6 +27,14 @@
     ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml:
       path: config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
       create: true
+    ~/.config/devcontainer.vim:
+      path: config/devcontainer.vim/*
+      create: true
+      glob: true
+    ~/.claude:
+      create: true
+      path: claude/*
+      glob: true
     ~/.gemini:
       create: true
       path: gemini/*

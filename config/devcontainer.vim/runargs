@@ -1,0 +1,1 @@
+-v "$(pwd):/work" -v "$HOME/.vim:/root/.vim" -v "$HOME/.gitconfig:/root/.gitconfig" -v "$HOME/.ssh:/root/.ssh" --workdir /work
