@@ -52,6 +52,7 @@
     ~/.pbuilderrc:
     ~/.pypirc:
     ~/.screenrc:
+    ~/.shellcheckrc:
     ~/.xbindkeysrc:
     ~/.xinitrc:
     ~/x.map:
