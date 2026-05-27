@@ -1,0 +1,3 @@
+# Shellcheck config
+enable=require-variable-braces
+enable=quote-safe-variables
