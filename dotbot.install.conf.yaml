@@ -31,6 +31,10 @@
       path: config/devcontainer.vim/*
       create: true
       glob: true
+    ~/.ai:
+      create: true
+      path: ai/*
+      glob: true
     ~/.claude:
       create: true
       path: claude/*
