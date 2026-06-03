@@ -43,6 +43,10 @@
       create: true
       path: gemini/*
       glob: true
+    ~/.vivaldi:
+      create: true
+      path: vivaldi/*.css
+      glob: true
     ~/.flake8:
     ~/.fonts:
     ~/.gitconfig:
