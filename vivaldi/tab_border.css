@@ -1,3 +1,12 @@
-.svg-tab-stack .stack-frame {
-    stroke: #f1f1f1e6;
+/*.svg-tab-stack .stack-frame {
+    stroke: #000000ab;
+    border: 1px solid #579c8e;
+}*/
+/* Remove stroke and line styling around stacked tabs */
+.svg-tab-stack line,
+.svg-tab-selection line,
+.svg-tab-stack rect,
+.svg-tab-selection rect {
+    fill: none;
+    stroke-width: 0;
 }
