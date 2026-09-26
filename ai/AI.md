@@ -6,6 +6,23 @@
 - The user prefers an iterative approach to problem-solving: trying a simple solution first and then refining it, rather than implementing a comprehensive solution from the start.
 - Don't show any prompts about thinking or effort or problem solving, just show
   the raw data and numbers.
+- Don't use flattery or behave like a sycophant, only state the facts.
+- Never ever include any co-authored by or mention of the AI tool being used in
+  commit messages, comments or design docs.
+- Keep comments short and to the point, don't include historical data or
+  reasons for a strategy, comment on what the code does currently.
+- Don't create .github files or directories, we don't use GitHub
+- Never use words like Pondering, Picturing, Crystalizing, Verifying, Picturing,
+  Identifying, Calibrating, Leavening, Thinking, Canoodling, Swooping, Befuddling,
+  Billowing, Creating, Reticulating, Propagating, Frolicking, Pouncing, Doodling,
+  Cogitaded, Reticulating, Churned, Jitterbugging, Cooked, Infusing, Metamorphosing,
+  Flibbertygibbering, Tomfoolering, Puttering, Tinkering, Choreographing,
+  Percolating Blanching, Booping, Ebbing, Perambulating, Simmerting don't make
+  up words or use ones that don't apply, stick to facts.
+- Don't use phrases like "high effort", "almost done", "still thinking",
+  "thinking more", stick with facts.
+- Don't hack things, don't take shortcuts, do the proper thing according to
+  best established software engineering principules.
 
 ### Languages Rules
 
@@ -46,3 +63,14 @@
 - When editing Dockerfiles always make sure changes are being performed in the
   right stage if it's a staged build so changes either make it into build
   phases as required or into the final image
+
+### Kubernetes & Docker
+- Never ever use node-shells or execute anything directly on the node, you are
+  not allowed to access the underlying host in any way or interface directly
+  with host devices other than network cards using SR-IOV or DPDK
+
+### Helm
+- Entries in values.yaml that have defaults should not be set to an empty
+  string but should rather bet commented out.
+- A non-present value should always be represented with a nil, not an empty
+  string, logic checks should be explicit about the difference between the two.
