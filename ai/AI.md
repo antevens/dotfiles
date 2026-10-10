@@ -74,3 +74,7 @@
   string but should rather bet commented out.
 - A non-present value should always be represented with a nil, not an empty
   string, logic checks should be explicit about the difference between the two.
+- README.yaml in a helm chart is visible to customers, it should never include
+  git information or other development references, installations from local
+  exploded charts, etc, it should reference tagged builds with semantic
+  versions.

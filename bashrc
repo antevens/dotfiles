@@ -124,3 +124,5 @@ export CHROME_EXECUTABLE=vivaldi
 # docker tag us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.35.3 gemini-sandbox
 export GEMINI_SANDBOX=lxc
 export GEMINI_SANDBOX_IMAGE=gemini-sandbox
+
+[[ -r "${HOME}/.config/expeto-mvn-env.sh" ]] && . "${HOME}/.config/expeto-mvn-env.sh"
