@@ -1,3 +1,3 @@
 # CLAUDE.md
 
-@../ai/AI.md
+@../.ai/AI.md
