@@ -9,8 +9,12 @@
     "source=devcontainer-claude-config,target=/home/vscode/.claude,type=volume"
   ],
   "containerEnv": {
-    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
+    "DEVC_WORKSPACE": "${localWorkspaceFolderBasename}"
   },
-  "postCreateCommand": "sudo chown vscode:vscode /home/vscode/.claude",
+  "postCreateCommand": {
+    "claude-config": "sudo chown vscode:vscode /home/vscode/.claude",
+    "bashrc": "printf '%s\\n' 'PS1=${PS1/\\\\u /${DEVC_WORKSPACE} }' \"alias c='claude --dangerously-skip-permissions'\" >> ~/.bashrc"
+  },
   "remoteUser": "vscode"
 }
