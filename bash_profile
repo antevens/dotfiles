@@ -1,12 +1,13 @@
+#!/bin/bash
 #######################################################
 # Antonia Stevens .bash_profile file
 #######################################################a
-FULL_NAME="Antonia Stevens"
-EMAIL="a@ant.st"
-GIT_BASE="${HOME}/Revisions"
+export FULL_NAME="Antonia Stevens"
+export EMAIL="a@ant.st"
+export GIT_BASE="${HOME}/Revisions"
 
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
+if [[ -f "${HOME}/.bashrc" ]]; then
+    source "${HOME}/.bashrc"
 fi
 
 # Debian maintainer config
@@ -24,5 +25,7 @@ fi
 shopt -s checkwinsize
 
 # Make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-. "$HOME/.cargo/env"
+if [[ -x /usr/bin/lesspipe ]] ; then
+    export LESSOPEN="| /usr/bin/lesspipe %s"
+    export LESSCLOSE="/usr/bin/lesspipe %s %s"
+fi

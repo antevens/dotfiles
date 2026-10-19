@@ -10,117 +10,117 @@ export GIT_BASE="${HOME}/Revisions"
 shopt -s direxpand
 
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+if [[ "${-}" == *i* ]]; then
 
-# Include local bin in path
-if [[ -d ${HOME}/bin ]] ; then
-    export PATH="${HOME}/bin:${PATH}"
-fi
-
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000000
-HISTFILESIZE=20000000
-
-# Run additional bashrc scipts or if .bashrc.d does not exist
-# create .bashrc.d directory
-# Only execute additional .bashrc scripts if they are secure, e.g. owned by the
-# user that is starting bash and not writable by others
-if [ -d "${HOME}/.bashrc.d" ]; then
-    mapfile -t scripts <<< "$(find "${HOME}/.bashrc.d/" -type f -perm -g-xw,o-xw -user "${USER}")"
-    for script in "${scripts[@]}"; do
-        # shellcheck disable=1090,1091
-        source "${script}"
-    done
-else
-    mkdir "${HOME}/.bashrc.d" && chmod 700 "${HOME}/.bashrc.d" && chmod -R og-wrx "${HOME}/.bashrc.d"
-fi
-
-# If base virtualenv exists we add it to path and source it
-venv="${HOME}/Virtualenvs/base"
-if [[ -d "${venv}" ]]; then
-    # shellcheck disable=1090,1091
-    source "${venv}/bin/activate"
-fi
-
-# Set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [[ -n "${force_color_prompt}" ]]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
+    # Include local bin in path
+    if [[ -d ${HOME}/bin ]] ; then
+        export PATH="${HOME}/bin:${PATH}"
     fi
+
+    # don't put duplicate lines or lines starting with space in the history.
+    # See bash(1) for more options
+    HISTCONTROL=ignoreboth
+
+    # append to the history file, don't overwrite it
+    shopt -s histappend
+
+    # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+    HISTSIZE=10000000
+    HISTFILESIZE=20000000
+
+    # Run additional bashrc scipts or if .bashrc.d does not exist
+    # create .bashrc.d directory
+    # Only execute additional .bashrc scripts if they are secure, e.g. owned by the
+    # user that is starting bash and not writable by others
+    if [[ -d "${HOME}/.bashrc.d" ]]; then
+        mapfile -t scripts <<< "$(find "${HOME}/.bashrc.d/" -type f -perm -g-xw,o-xw -user "${USER}")"
+        for script in "${scripts[@]}"; do
+            if [[ -n "${script}" ]] ; then
+                # shellcheck disable=1090,1091
+                source "${script}"
+            fi
+        done
+    else
+        mkdir "${HOME}/.bashrc.d" && chmod 700 "${HOME}/.bashrc.d" && chmod -R og-wrx "${HOME}/.bashrc.d"
+    fi
+
+    # If base virtualenv exists we add it to path and source it
+    venv="${HOME}/Virtualenvs/base"
+    if [[ -d "${venv}" ]]; then
+        # shellcheck disable=1090,1091
+        source "${venv}/bin/activate"
+    fi
+
+    # Set a fancy prompt (non-color, unless we know we "want" color)
+    case "${TERM}" in
+        xterm-color|*-256color) color_prompt=yes;;
+    esac
+
+    # uncomment for a colored prompt, if the terminal has the capability; turned
+    # off by default to not distract the user: the focus in a terminal window
+    # should be on the output of commands, not on the prompt
+    #force_color_prompt=yes
+
+    if [[ -n "${force_color_prompt}" ]]; then
+        if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+            # We have color support; assume it's compliant with Ecma-48
+            # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+            # a case would tend to support setf rather than setaf.)
+            color_prompt=yes
+        else
+            color_prompt=
+        fi
+    fi
+
+    if [ "${color_prompt}" = yes ]; then
+        # shellcheck disable=2154
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    else
+        PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    fi
+    unset color_prompt force_color_prompt
+
+    # If this is an xterm set the title to user@host:dir
+    case "${TERM}" in
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+(${debian_chroot})}\u@\h: \w\a\]${PS1}"
+        ;;
+    *)
+        ;;
+    esac
+
+    # Colored GCC warnings and errors
+    export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+    # Alias definitions.
+    # You may want to put all your additions into a separate file like
+    # ~/.bash_aliases, instead of adding them here directly.
+    # See /usr/share/doc/bash-doc/examples in the bash-doc package.
+    if [[ -f "${HOME}/.bash_aliases" ]]; then
+        # shellcheck disable=1090,1091
+        source "${HOME}/.bash_aliases"
+    fi
+
+    # Enable programmable completion features (you don't need to enable
+    # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+    # sources /etc/bash.bashrc).
+    if ! shopt -oq posix; then
+    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [[ -f /etc/bash_completion ]]; then
+        . /etc/bash_completion
+    fi
+    fi
+
+    # Disable/Enable XFCE features
+    xfconf-query --set false --channel xfwm4 --property /general/zoom_desktop
+
+    # Set chrome executable to vivaldi for flutter
+    export CHROME_EXECUTABLE=vivaldi
+
+    # Enable LXC sandboxing gor Gemini
+    # Don't forget to tag the image locally, e.g.
+    # docker tag us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.35.3 gemini-sandbox
+    export GEMINI_SANDBOX=lxc
+    export GEMINI_SANDBOX_IMAGE=gemini-sandbox
 fi
-
-if [ "${color_prompt}" = yes ]; then
-    # shellcheck disable=2154
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "${TERM}" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# Colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [[ -f "${HOME}/.bash_aliases" ]]; then
-    # shellcheck disable=1090,1091
-    source "${HOME}/.bash_aliases"
-fi
-
-# Enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [[ -f /etc/bash_completion ]]; then
-    . /etc/bash_completion
-  fi
-fi
-
-# Disable/Enable XFCE features
-xfconf-query --set false --channel xfwm4 --property /general/zoom_desktop
-
-# Set chrome executable to vivaldi for flutter
-export CHROME_EXECUTABLE=vivaldi
-
-# Enable LXC sandboxing gor Gemini
-# Don't forget to tag the image locally, e.g.
-# docker tag us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.35.3 gemini-sandbox
-export GEMINI_SANDBOX=lxc
-export GEMINI_SANDBOX_IMAGE=gemini-sandbox
