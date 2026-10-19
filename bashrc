@@ -33,7 +33,7 @@ if [[ "${-}" == *i* ]]; then
     # Only execute additional .bashrc scripts if they are secure, e.g. owned by the
     # user that is starting bash and not writable by others
     if [[ -d "${HOME}/.bashrc.d" ]]; then
-        mapfile -t scripts <<< "$(find "${HOME}/.bashrc.d/" -type f -perm -g-xw,o-xw -user "${USER}")"
+        mapfile -t scripts <<< "$(find -L "${HOME}/.bashrc.d/" -type f -perm -g-xw,o-xw -user "${USER}")"
         for script in "${scripts[@]}"; do
             if [[ -n "${script}" ]] ; then
                 # shellcheck disable=1090,1091
