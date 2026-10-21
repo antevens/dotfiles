@@ -78,3 +78,15 @@
   git information or other development references, installations from local
   exploded charts, etc, it should reference tagged builds with semantic
   versions.
+
+### Git
+- Never rewrite history on a branch that is pushed or shared: no
+  `git commit --amend`, `git rebase`, or `git reset --hard`. Add new commits
+  on top instead so pushes stay fast-forward and never need `--force`.
+- Before choosing how to land work, check whether the branch is published
+  (`git branch -vv`, the `git status -sb` upstream line, or
+  `git ls-remote origin <branch>`). If it is published, additive commits only.
+- Only rewrite history when the branch is confirmed local-only and unpushed,
+  and only when explicitly asked to tidy it; default to additive even then.
+- To build on a dependency that lives on its own branch, merge it in rather
+  than rebasing the shared branch onto it.

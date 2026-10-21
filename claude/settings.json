@@ -2,5 +2,6 @@
   "model": "claude-fable-5[1m]",
   "effortLevel": "xhigh",
   "theme": "dark",
-  "?spinnerVerbs": ""
+  "?spinnerVerbs": "",
+  "skipDangerousModePermissionPrompt": true
 }
