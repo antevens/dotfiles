@@ -6,7 +6,7 @@
 	url = https://github.com/vim-syntastic/syntastic.git
 [submodule "dotbot"]
 	path = dotbot
-	url = https://github.com/antevens/dotbot
+	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
 [submodule "vim/pack/start/vim-airline"]
 	path = vim/pack/native/start/vim-airline

@@ -1,0 +1,349 @@
+#!/bin/bash
+#
+# Create, start and attach to devcontainers for the current repository.
+# Repositories without their own .devcontainer use the shared default config.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+readonly version="1.0.0"
+readonly default_config="${DEVC_CONFIG:-${HOME}/.config/devcontainer/devcontainer.json}"
+readonly state_dir="${XDG_STATE_HOME:-${HOME}/.local/state}/devc"
+readonly -a commands=(up shell claude update rebuild stop rm init ls completion help)
+
+#######################################
+# Print an error message to stderr.
+# Arguments:
+#   Message to print.
+#######################################
+function err() {
+  echo "devc: $*" >&2
+}
+
+#######################################
+# Print usage information.
+# Outputs:
+#   Usage text to stdout.
+#######################################
+function usage() {
+  cat <<EOF
+Usage: devc <command> [args...]
+       devc --help | --version
+
+Commands:
+  up          Create and start the devcontainer
+  shell [cmd] Open a login shell (or run cmd) in the devcontainer, starting it if needed
+  claude      Run claude in the devcontainer, starting it if needed
+  update      Recreate the devcontainer without image cache, applying config
+              changes and installing the latest feature versions such as claude.
+              A .devcontainer/devcontainer.json created by init is replaced
+              with the shared config unless it has been modified
+  rebuild     Recreate the devcontainer, reusing cached image layers
+  stop        Stop the devcontainer
+  rm          Remove the devcontainer
+  init        Copy the shared config into .devcontainer/ for per-repo customisation
+  ls          List all devcontainers
+  completion  Print the bash completion script, load with:
+              source <(devc completion bash)
+
+Options:
+  -h, --help     Show this help
+  -V, --version  Show the devc version
+
+The workspace is the git top-level of the current directory, or the current
+directory outside a git repository. Set DEVC_CONFIG to use another default
+config.
+EOF
+}
+
+#######################################
+# Print the workspace folder for the current directory.
+# Outputs:
+#   Absolute path of the workspace folder.
+#######################################
+function workspace_folder() {
+  git rev-parse --show-toplevel 2>/dev/null || pwd
+}
+
+#######################################
+# Print devcontainer CLI arguments selecting the workspace and config.
+# Arguments:
+#   Workspace folder.
+# Outputs:
+#   One argument per line.
+#######################################
+function config_args() {
+  local workspace="$1"
+  printf '%s\n' --workspace-folder "${workspace}"
+  if [[ ! -f "${workspace}/.devcontainer/devcontainer.json" \
+    && ! -f "${workspace}/.devcontainer.json" ]]; then
+    printf '%s\n' --override-config "${default_config}"
+  fi
+}
+
+#######################################
+# Print the ID of the container for a workspace.
+# Arguments:
+#   Workspace folder.
+#   Optional extra docker ps flag, e.g. --all.
+# Outputs:
+#   Container ID, empty if none exists.
+#######################################
+function container_id() {
+  local workspace="$1"
+  shift
+  docker ps --quiet "$@" --filter "label=devcontainer.local_folder=${workspace}"
+}
+
+#######################################
+# Create and start the devcontainer.
+# Lockfiles are disabled for the shared config as there is no
+# .devcontainer directory to write them to.
+# Arguments:
+#   Workspace folder.
+#   Extra devcontainer up arguments.
+#######################################
+function up() {
+  local workspace="$1"
+  shift
+  local -a args
+  mapfile -t args < <(config_args "${workspace}")
+  if [[ " ${args[*]} " == *" --override-config "* ]]; then
+    args+=(--no-lockfile)
+  fi
+  devcontainer up "${args[@]}" "$@"
+}
+
+#######################################
+# Start the devcontainer if it is not running.
+# Arguments:
+#   Workspace folder.
+#######################################
+function ensure_up() {
+  local workspace="$1"
+  if [[ -z "$(container_id "${workspace}")" ]]; then
+    up "${workspace}"
+  fi
+}
+
+#######################################
+# Run a command in the devcontainer.
+# Arguments:
+#   Workspace folder.
+#   Command and arguments.
+#######################################
+function exec_in() {
+  local workspace="$1"
+  shift
+  local -a args
+  ensure_up "${workspace}"
+  mapfile -t args < <(config_args "${workspace}")
+  exec devcontainer exec "${args[@]}" "$@"
+}
+
+#######################################
+# Print the SHA-256 of a file.
+# Arguments:
+#   File path.
+# Outputs:
+#   Hex digest.
+#######################################
+function file_hash() {
+  local digest
+  digest="$(sha256sum "$1")"
+  echo "${digest%% *}"
+}
+
+#######################################
+# Print the path of the file recording the hash of a workspace config
+# created by init.
+# Globals:
+#   state_dir
+# Arguments:
+#   Workspace folder.
+# Outputs:
+#   State file path.
+#######################################
+function state_file() {
+  local workspace="$1"
+  local digest
+  digest="$(printf '%s' "${workspace}" | sha256sum)"
+  echo "${state_dir}/${digest%% *}.sha256"
+}
+
+#######################################
+# Copy the shared config into the workspace and record its hash.
+# Globals:
+#   default_config
+#   state_dir
+# Arguments:
+#   Workspace folder.
+#######################################
+function install_config() {
+  local workspace="$1"
+  local config="${workspace}/.devcontainer/devcontainer.json"
+  mkdir -p "${workspace}/.devcontainer" "${state_dir}"
+  cp "${default_config}" "${config}"
+  file_hash "${config}" > "$(state_file "${workspace}")"
+}
+
+#######################################
+# Replace a workspace config created by init with the current shared
+# config, unless it has been modified since.
+# Globals:
+#   default_config
+# Arguments:
+#   Workspace folder.
+# Outputs:
+#   Status messages to stdout and stderr.
+#######################################
+function refresh_config() {
+  local workspace="$1"
+  local config="${workspace}/.devcontainer/devcontainer.json"
+  local state
+  state="$(state_file "${workspace}")"
+  if [[ ! -f "${config}" || ! -f "${state}" ]]; then
+    return
+  fi
+  if [[ "$(file_hash "${config}")" != "$(< "${state}")" ]]; then
+    err "${config} has local changes, not replacing"
+    return
+  fi
+  if cmp --silent "${default_config}" "${config}"; then
+    return
+  fi
+  install_config "${workspace}"
+  echo "Updated ${config} from ${default_config}"
+}
+
+#######################################
+# Complete devc arguments for bash programmable completion.
+# Globals:
+#   COMP_WORDS
+#   COMP_CWORD
+#   COMPREPLY
+#   _devc_commands
+#######################################
+function _devc_complete() {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=()
+  if [[ "${COMP_CWORD}" -eq 1 ]]; then
+    # _devc_commands is defined by the completion script
+    # shellcheck disable=SC2154
+    mapfile -t COMPREPLY < <(compgen -W "${_devc_commands[*]} --help --version" -- "${cur}")
+  elif [[ "${COMP_CWORD}" -eq 2 ]]; then
+    case "${COMP_WORDS[1]}" in
+      shell)
+        mapfile -t COMPREPLY < <(compgen -c -- "${cur}")
+        ;;
+      completion)
+        mapfile -t COMPREPLY < <(compgen -W "bash" -- "${cur}")
+        ;;
+      *) ;;
+    esac
+  fi
+}
+
+#######################################
+# Print the bash completion script.
+# Arguments:
+#   Shell name, only bash is supported.
+# Outputs:
+#   Completion script to stdout.
+#######################################
+function completion() {
+  local shell="${1:-bash}"
+  if [[ "${shell}" != "bash" ]]; then
+    err "unsupported shell: ${shell}"
+    exit 1
+  fi
+  printf '_devc_commands=(%s)\n' "${commands[*]}"
+  declare -f _devc_complete
+  echo "complete -F _devc_complete devc"
+}
+
+function main() {
+  local command="${1:-}"
+  local workspace
+  local id
+  if [[ $# -gt 0 ]]; then
+    shift
+  fi
+
+  case "${command}" in
+    -h | --help | help | "")
+      usage
+      return
+      ;;
+    -V | --version)
+      echo "devc ${version}"
+      return
+      ;;
+    completion)
+      completion "$@"
+      return
+      ;;
+    *) ;;
+  esac
+
+  if [[ ! -f "${default_config}" ]]; then
+    err "default config not found: ${default_config}"
+    exit 1
+  fi
+  workspace="$(workspace_folder)"
+
+  case "${command}" in
+    up)
+      up "${workspace}" "$@"
+      ;;
+    shell)
+      if [[ $# -eq 0 ]]; then
+        exec_in "${workspace}" bash -l
+      else
+        exec_in "${workspace}" "$@"
+      fi
+      ;;
+    claude)
+      exec_in "${workspace}" claude "$@"
+      ;;
+    update)
+      refresh_config "${workspace}"
+      up "${workspace}" --remove-existing-container --build-no-cache "$@"
+      ;;
+    rebuild)
+      up "${workspace}" --remove-existing-container "$@"
+      ;;
+    stop)
+      id="$(container_id "${workspace}")"
+      if [[ -n "${id}" ]]; then
+        docker stop "${id}"
+      fi
+      ;;
+    rm)
+      id="$(container_id "${workspace}" --all)"
+      if [[ -n "${id}" ]]; then
+        docker rm --force "${id}"
+      fi
+      ;;
+    init)
+      if [[ -e "${workspace}/.devcontainer/devcontainer.json" ]]; then
+        err "${workspace}/.devcontainer/devcontainer.json already exists"
+        exit 1
+      fi
+      install_config "${workspace}"
+      echo "Created ${workspace}/.devcontainer/devcontainer.json"
+      ;;
+    ls)
+      docker ps --all --filter "label=devcontainer.local_folder" \
+        --format 'table {{.ID}}\t{{.Status}}\t{{.Label "devcontainer.local_folder"}}'
+      ;;
+    *)
+      err "unknown command: ${command}"
+      usage >&2
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

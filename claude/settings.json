@@ -1,7 +1,11 @@
 {
-  "model": "claude-fable-5[1m]",
+  "model": "opus",
   "effortLevel": "xhigh",
   "theme": "dark",
-  "?spinnerVerbs": "",
   "skipDangerousModePermissionPrompt": true
+  "spinnerTipsEnabled": false,
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": ["..."]
+  }
 }

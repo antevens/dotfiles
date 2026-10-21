@@ -27,8 +27,8 @@
     ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml:
       path: config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
       create: true
-    ~/.config/devcontainer.vim:
-      path: config/devcontainer.vim/*
+    ~/.config/devcontainer:
+      path: config/devcontainer/*
       create: true
       glob: true
     ~/.ai:
@@ -45,7 +45,7 @@
       glob: true
     ~/.vivaldi:
       create: true
-      path: vivaldi/*.css
+      path: vivaldi/*
       glob: true
     ~/.flake8:
     ~/.fonts:

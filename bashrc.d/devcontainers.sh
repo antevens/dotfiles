@@ -5,8 +5,8 @@ if [[ -d ${HOME}/.devcontainers/bin ]] ; then
     export PATH="${HOME}/.devcontainers/bin:${PATH}"
 fi
 
-# Add autocompluete for devcontainers.vim
-if command -v devcontainer.vim > /dev/null ; then
-   # shellcheck disable=1090,1091
-   source <(devcontainer.vim  bash-complete-func)
+# devc command completion, see ~/bin/devc
+if command -v devc > /dev/null ; then
+    # shellcheck disable=1090,1091
+    source <(devc completion bash)
 fi

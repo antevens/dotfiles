@@ -12,13 +12,6 @@
 - Keep comments short and to the point, don't include historical data or
   reasons for a strategy, comment on what the code does currently.
 - Don't create .github files or directories, we don't use GitHub
-- Never use words like Pondering, Picturing, Crystalizing, Verifying, Picturing,
-  Identifying, Calibrating, Leavening, Thinking, Canoodling, Swooping, Befuddling,
-  Billowing, Creating, Reticulating, Propagating, Frolicking, Pouncing, Doodling,
-  Cogitaded, Reticulating, Churned, Jitterbugging, Cooked, Infusing, Metamorphosing,
-  Flibbertygibbering, Tomfoolering, Puttering, Tinkering, Choreographing,
-  Percolating Blanching, Booping, Ebbing, Perambulating, Simmerting don't make
-  up words or use ones that don't apply, stick to facts.
 - Don't use phrases like "high effort", "almost done", "still thinking",
   "thinking more", stick with facts.
 - Don't hack things, don't take shortcuts, do the proper thing according to
