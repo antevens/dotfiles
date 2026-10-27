@@ -2,7 +2,7 @@
   "model": "opus",
   "effortLevel": "xhigh",
   "theme": "dark",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
