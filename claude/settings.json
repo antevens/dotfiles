@@ -2,9 +2,10 @@
   "model": "opus",
   "effortLevel": "xhigh",
   "theme": "dark",
+  "skipDangerousModePermissionPrompt": true,
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
-    "verbs": ["Working"]
+    "verbs": ["..."]
   }
 }
